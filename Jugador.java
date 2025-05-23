@@ -83,6 +83,19 @@ public class Jugador {
         }
     }
 
+    // Método que muestra cuánto tiempo falta para la próxima recarga de vida.
+    public void mostrarTiempoParaRecarga() {
+        if (vidas >= MAX_VIDAS) {
+            System.out.println("Tienes el máximo de vidas. No necesitas recarga.");
+            return;
+        }
+
+        long minutosPasados = ChronoUnit.MINUTES.between(ultimaRecarga, LocalDateTime.now());
+        long minutosParaProximaVida = TIEMPO_RECARGA_MINUTOS - (minutosPasados % TIEMPO_RECARGA_MINUTOS);
+
+        System.out.println("Faltan " + minutosParaProximaVida + " minutos para la próxima recarga de vida.");
+    }
+
     // Getter para obtener cuántas vidas tiene actualmente el jugador.
     public int getVidas() {
         return vidas;
